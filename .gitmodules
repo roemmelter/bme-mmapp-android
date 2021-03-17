@@ -1,0 +1,36 @@
+[submodule "01_introduction"]
+	path = 01_introduction
+	url = https://github.com/roemmelter/bme-mmapp-android-01
+[submodule "02_user-interface"]
+	path = 02_user-interface
+	url = https://github.com/roemmelter/bme-mmapp-android-02
+[submodule "03_graphics"]
+	path = 03_graphics
+	url = https://github.com/roemmelter/bme-mmapp-android-03
+[submodule "04_persistence"]
+	path = 04_persistence
+	url = https://github.com/roemmelter/bme-mmapp-android-04
+[submodule "05_sensors"]
+	path = 05_sensors
+	url = https://github.com/roemmelter/bme-mmapp-android-05
+[submodule "06_concurrency"]
+	path = 06_concurrency
+	url = https://github.com/roemmelter/bme-mmapp-android-06
+[submodule "07_networking"]
+	path = 07_networking
+	url = https://github.com/roemmelter/bme-mmapp-android-07
+[submodule "08_multimedia"]
+	path = 08_multimedia
+	url = https://github.com/roemmelter/bme-mmapp-android-08
+[submodule "09_special_graphics-performance"]
+	path = 09_special_graphics-performance
+	url = https://github.com/roemmelter/bme-mmapp-android-09
+[submodule "10_special_libraries"]
+	path = 10_special_libraries
+	url = https://github.com/roemmelter/bme-mmapp-android-10
+[submodule "11_special_services"]
+	path = 11_special_services
+	url = https://github.com/roemmelter/bme-mmapp-android-11
+[submodule "12_special_cryptography"]
+	path = 12_special_cryptography
+	url = https://github.com/roemmelter/bme-mmapp-android-12
