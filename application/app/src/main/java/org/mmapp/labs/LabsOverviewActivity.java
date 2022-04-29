@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.mmapp.MainActivity;
 import org.mmapp.R;
 
+import java.util.ArrayList;
+
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
  * <p><br>
@@ -34,15 +36,6 @@ public class LabsOverviewActivity extends AppCompatActivity {
     private final String PACKAGE_BASE = "org.mmapp.";
     private final String PACKAGE_ASSIGNMENTS = "assignments.";
     private final String PACKAGE_LABS = "labs.";
-    private final String[] ACTIVITY_LIST = {
-            PACKAGE_ASSIGNMENTS + "AssignmentsOverview",
-            PACKAGE_LABS + "About",
-            PACKAGE_LABS + "BorderLayout",
-            PACKAGE_LABS + "Button",
-            PACKAGE_LABS + "Calculator",
-            PACKAGE_LABS + "Dialog",
-            PACKAGE_LABS + "Menu",
-    };
     private final String ACTIVITY_STRING = "Activity";
 
     @Override
@@ -57,22 +50,21 @@ public class LabsOverviewActivity extends AppCompatActivity {
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setPadding(10,10,10,10);
 
-        for (String activity : ACTIVITY_LIST) {
+        ArrayList<String> activityList = new ArrayList<>();
+        activityList = fillActivityList(activityList);
+        for (String activity : activityList) {
             ll.addView(createButtonForActivity(this, activity));
         }
 
         setContentView(ll);
-
         configureActionBar();
     }
-
     private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
         String className = getClass().getSimpleName();
         actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -80,6 +72,23 @@ public class LabsOverviewActivity extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+    private ArrayList<String> fillActivityList(ArrayList<String> arrayList) {
+        String packageName = PACKAGE_ASSIGNMENTS;
+        arrayList.add(packageName + "AssignmentsOverview");
+        packageName = PACKAGE_LABS;
+        arrayList.add(packageName + "About");
+        arrayList.add(packageName + "BorderLayout");
+        arrayList.add(packageName + "Button");
+        arrayList.add(packageName + "Calculator");
+        arrayList.add(packageName + "Calendar");
+        arrayList.add(packageName + "Dialog");
+        arrayList.add(packageName + "Geo");
+        arrayList.add(packageName + "Menu");
+        arrayList.add(packageName + "Rotation");
+        arrayList.add(packageName + "Simple");
+        arrayList.add(packageName + "SMS");
+        return arrayList;
     }
 
     protected Button createButtonForActivity(Context ctx, String activity) {

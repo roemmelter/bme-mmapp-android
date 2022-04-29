@@ -20,6 +20,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.mmapp.MainActivity;
 import org.mmapp.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
  * <p><br>
@@ -35,27 +39,6 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
     private final String PACKAGE_BASE = "org.mmapp.";
     private final String PACKAGE_ASSIGNMENTS = "assignments.";
     private final String PACKAGE_LABS = "labs.";
-    private final String[] ACTIVITY_LIST = {
-            PACKAGE_LABS + "LabsOverview",
-            // Assignment 1
-            PACKAGE_ASSIGNMENTS + "StateSwitching",
-            PACKAGE_ASSIGNMENTS + "RecordVideo",
-            PACKAGE_ASSIGNMENTS + "NumpadDemo",
-            // Assignment 2
-            PACKAGE_ASSIGNMENTS + "GoogleSearchResults",
-            PACKAGE_ASSIGNMENTS + "Lottery",
-            PACKAGE_ASSIGNMENTS + "FahrenheitToCelsius",
-            // Assignment 3
-            PACKAGE_ASSIGNMENTS + "RandomSquares",
-            PACKAGE_ASSIGNMENTS + "Mondrian",
-            PACKAGE_ASSIGNMENTS + "Terminal",
-            PACKAGE_ASSIGNMENTS + "Wildbienen",
-            PACKAGE_ASSIGNMENTS + "Breakout",
-            // Assignment 4
-            PACKAGE_ASSIGNMENTS + "SnowFlakes",
-            // Assignment 5
-            // Assignment 6
-    };
     private final String ACTIVITY_STRING = "Activity";
 
     @Override
@@ -75,23 +58,22 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setPadding(10,10,10,10);
 
-        for (String activity : ACTIVITY_LIST) {
+        ArrayList<String> activityList = new ArrayList<>();
+        activityList = fillActivityList(activityList);
+        for (String activity : activityList) {
             ll.addView(createButtonForActivity(this, activity));
         }
-
         scrollView.addView(ll);
-        setContentView(scrollView);
 
+        setContentView(scrollView);
         configureActionBar();
     }
-
     private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
         String className = getClass().getSimpleName();
         actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -100,8 +82,32 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    private ArrayList<String> fillActivityList(ArrayList<String> arrayList) {
+        String packageName = PACKAGE_LABS;
+        arrayList.add(packageName + "LabsOverview");
+        packageName = PACKAGE_ASSIGNMENTS;
+        // Assignment 1
+        arrayList.add(packageName + "StateSwitching");
+        arrayList.add(packageName + "RecordVideo");
+        arrayList.add(packageName + "NumpadDemo");
+        // Assignment 2
+        arrayList.add(packageName + "GoogleSearchResults");
+        arrayList.add(packageName + "Lottery");
+        arrayList.add(packageName + "FahrenheitToCelsius");
+        // Assignment 3
+        arrayList.add(packageName + "RandomSquares");
+        arrayList.add(packageName + "Mondrian");
+        arrayList.add(packageName + "Terminal");
+        arrayList.add(packageName + "Wildbienen");
+        arrayList.add(packageName + "Breakout");
+        // Assignment 4
+        arrayList.add(packageName + "Snowflakes");
+        // Assignment 5
+        // Assignment 6
+        return arrayList;
+    }
 
-    protected Button createButtonForActivity(Context ctx, String activity) {
+    private Button createButtonForActivity(Context ctx, String activity) {
         String btnLabel = activity.substring(activity.lastIndexOf(".")+1);
         Button btn = new Button(ctx);
         btn.setTypeface(Typeface.create(
