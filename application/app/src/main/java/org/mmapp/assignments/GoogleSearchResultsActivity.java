@@ -50,6 +50,10 @@ public class GoogleSearchResultsActivity extends AppCompatActivity {
 
         startActivityForResult(new Intent(getApplicationContext(), GoogleSearchActivity.class), 1);
 
+        configureActionBar();
+    }
+
+    private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
         String className = getClass().getSimpleName();
         actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));

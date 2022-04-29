@@ -27,6 +27,10 @@ public class StateSwitchingActivity extends AppCompatActivity {
         Log.i(getResources().getString(R.string.tag), "onCreate()");
         super.onCreate(savedInstanceState);
 
+        configureActionBar();
+    }
+
+    private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
         String className = getClass().getSimpleName();
         actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));

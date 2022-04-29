@@ -68,8 +68,12 @@ public class NumpadActivity extends AppCompatActivity {
 
         setContentView(tbl);
 
+        configureActionBar();
+    }
+
+    private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        String     className = getClass().getSimpleName();
+        String className = getClass().getSimpleName();
         actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
         actionBar.setDisplayHomeAsUpEnabled(true);
     }

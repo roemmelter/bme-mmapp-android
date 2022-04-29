@@ -63,9 +63,13 @@ public class LabsOverviewActivity extends AppCompatActivity {
 
         setContentView(ll);
 
+        configureActionBar();
+    }
+
+    private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
         String className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf(ACTIVITY_STRING)));
+        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
