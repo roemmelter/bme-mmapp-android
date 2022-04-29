@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/north"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/grey_85"
+        android:gravity="center_horizontal"
+        android:text="@string/text_view_north"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <TextView
+        android:id="@+id/west"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/north"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/south"
+        android:background="@color/teal_200"
+        android:gravity="center_vertical"
+        android:text="@string/text_view_west"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/south"
+        android:layout_below="@id/north"
+        android:layout_toStartOf="@id/east"
+        android:layout_toEndOf="@id/west"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/text_view_center"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <TextView
+        android:id="@+id/east"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/north"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/south"
+        android:background="@color/teal_200"
+        android:gravity="center_vertical"
+        android:text="@string/text_view_east"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <TextView
+        android:id="@+id/south"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_85"
+        android:gravity="center_horizontal"
+        android:text="@string/text_view_south"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+</RelativeLayout>
