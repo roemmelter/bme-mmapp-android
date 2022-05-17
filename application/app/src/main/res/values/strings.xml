@@ -21,4 +21,34 @@
     <string name="tag">MMAPP</string>
     <string name="class_overview_assignments">org.mmapp.assignments.AssignmentsOverviewActivity</string>
     <string name="class_overview_labs">org.mmapp.labs.LabsOverviewActivity</string>
+    <string name="wildbienen_intro">Willkommen zu der
+        Bienenidentifikations-Checkliste.\nBeantworten Sie die folgenden Fragen mit \"Ja\" oder
+        \"Nein\".</string>
+    <string name="wildbienen_root">Gibt es dichte Haarbüschel (\"Sammelbürsten\") am 3.Beinpaar
+        oder an der Unterseite des Hinterleibes?</string>
+    <string name="wildbienen_root_yes_q">Hat die Biene dichte Haarbüschel (\"Sammelbürsten\") an
+        den Beinen, insbesondere am 3.Beinpaar?</string>
+    <string name="wildbienen_root_yes_q_yes_a">Es handelt sich um eine Pelzbiene.</string>
+    <string name="wildbienen_root_yes_q_no_q">Wurde die Biene im Frühjahr vor Mai
+        gesichtet?</string>
+    <string name="wildbienen_root_yes_q_no_q_yes_q">Ist die Biene nur spärlich behaart und
+        hat einen sehr schlanken Körper?</string>
+    <string name="wildbienen_root_yes_q_no_q_yes_q_yes_a">Es handelt sich um eine
+        Scherenbiene.</string>
+    <string name="wildbienen_root_yes_q_no_q_yes_q_no_a">Es handelt sich um eine Mauerbiene
+        .</string>
+    <string name="wildbienen_root_yes_q_no_q_no_q">Ist die Biene stark behaart und/oder
+        weitesgehend braun gefärbt?</string>
+    <string name="wildbienen_root_yes_q_no_q_no_q_yes_a">Es handelt sich um eine
+        Blattschneiderbiene</string>
+    <string name="wildbienen_root_yes_q_no_q_no_q_no_q">Ist die Körperlänge der Biene
+        kürzer als 10mm?</string>
+    <string name="wildbienen_root_yes_q_no_q_no_q_no_q_yes_a">Es handelt sich um eine
+        Löcherbiene.</string>
+    <string name="wildbienen_root_yes_q_no_q_no_q_no_q_no_a">Es handelt sich um eine
+        Wollbiene.</string>
+    <string name="wildbienen_root_no_q">Ist die Biene weitesgehend schwarz gefärbt mit heller
+        Gesichtszeichnung und hellen Flecken an Brust und Beinen?</string>
+    <string name="wildbienen_root_no_q_yes_a">Es handelt sich um eine Maskenbiene.</string>
+    <string name="wildbienen_root_no_q_no_a">Es handelt sich um eine Solitäre Wespe.</string>
 </resources>

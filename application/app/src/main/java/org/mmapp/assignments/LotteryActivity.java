@@ -17,7 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
+import java.util.TreeSet;
 
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
@@ -42,9 +46,8 @@ public class LotteryActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int[] numberArray = generateLotteryNumbers();
-                numberArray = sortNumbers(numberArray);
-                String numberString = prettyFormatNumbers(numberArray);
+                TreeSet<Integer> numberList = generateLotteryNumbers();
+                String numberString = prettyFormatNumbers(numberList);
                 resultView.setText("Your lucky numbers are:\n" + numberString);
             }
         });
@@ -54,17 +57,14 @@ public class LotteryActivity extends AppCompatActivity {
         ll.addView(resultView);
 
         setContentView(ll);
-
         configureActionBar();
     }
-
     private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
         String className = getClass().getSimpleName();
         actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -106,60 +106,25 @@ public class LotteryActivity extends AppCompatActivity {
         return resultView;
     }
 
-    private int[] generateLotteryNumbers() {
+    private TreeSet<Integer> generateLotteryNumbers() {
         final int EXCLUSIVE_BOUND = 50;
-        int numberCount = 6;
-        int[] numberArray = new int[numberCount];
+        final int NUMBER_COUNT = 6;
+        TreeSet<Integer> numberList = new TreeSet<>();
+
         Random randomGenerator = new Random();
-        for (int i = 0; i < numberCount; i++) {
-            numberArray[i] = randomGenerator.nextInt(EXCLUSIVE_BOUND);
-        }
-        return numberArray;
-    }
-
-    private int[] sortNumbers(int[] numberArray) {
-        quickSort(numberArray, 0, numberArray.length - 1);
-        return numberArray;
-    }
-
-    private void quickSort (int[] array, int start, int end) {
-        int newPartition;
-
-        if (start < end) {
-            newPartition = partition(array, start, end);
-            quickSort(array, start, newPartition - 1);
-            quickSort(array, newPartition + 1, end);
-        }
-    }
-    private int partition(int array[], int start, int end) {
-
-        int pivot = array[end];
-        int j = start;
-
-        // Keep placing elements less than the pivot element to the left
-        for (int i=start; i<end; i++) {
-            if (array[i] < pivot) {
-                // Swap array[i] with array[j]
-                int tmp = array[i];
-                array[i] = array[j];
-                array[j] = tmp;
-                j++;
+        while(numberList.size() < NUMBER_COUNT) {
+            int num = randomGenerator.nextInt(EXCLUSIVE_BOUND);
+            if (!numberList.contains(num)) {
+                numberList.add(num);
             }
         }
-        // Place the pivot i.e array[end] at its final position and return the pivot index
-        // for partitioning the array
-        int tmp = array[j];
-        array[j] = array[end];
-        array[end] = tmp;
-
-        return j;
+        return numberList;
     }
-
-    private String prettyFormatNumbers(int[] numberArray) {
+    private String prettyFormatNumbers(TreeSet<Integer> numberList) {
         final String DIVIDER = ", ";
         final int DIVIDER_LENGTH = DIVIDER.length();
         String numberString = "";
-        for (int number : numberArray) {
+        for (int number : numberList) {
             numberString += number + DIVIDER;
         }
         return numberString.substring(0, numberString.length() - DIVIDER_LENGTH);
