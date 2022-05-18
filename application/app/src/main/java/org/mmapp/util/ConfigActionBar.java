@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.mmapp.assignments.AssignmentsOverviewActivity;
 
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
  * <p><br>
  * <b>ConfigActionBar</b><br>
- * Description
+ *
  * </p><br>
  *
  * @author Erik Roemmelt
@@ -55,3 +58,12 @@ public class ConfigActionBar {
         _actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
     }
 }
+// Example of usage
+// private ConfigActionBar configActionBar;
+// ...onCreate() {
+//     configActionBar = new ConfigActionBar(...OverviewActivity.class, this, true);
+// }
+// public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//     configActionBar.setActionBackButton(item);
+//     return super.onOptionsItemSelected(item);
+// }
