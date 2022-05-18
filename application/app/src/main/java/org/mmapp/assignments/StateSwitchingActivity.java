@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
@@ -21,28 +22,16 @@ import org.mmapp.R;
  * @author Erik Roemmelt
  */
 public class StateSwitchingActivity extends AppCompatActivity {
+    private ConfigActionBar configActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(getResources().getString(R.string.tag), "onCreate()");
         super.onCreate(savedInstanceState);
-
-        configureActionBar();
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(StateSwitchingActivity.this, AssignmentsOverviewActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 

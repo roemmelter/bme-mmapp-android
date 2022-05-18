@@ -11,41 +11,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Application">
-        <activity android:name="org.mmapp.assignments.AssignmentsOverviewActivity" />
-        <activity android:name="org.mmapp.assignments.StateSwitchingActivity" />
-        <activity android:name="org.mmapp.assignments.RecordVideoActivity" />
-        <activity android:name="org.mmapp.assignments.NumpadDemoActivity" />
-        <activity android:name="org.mmapp.assignments.NumpadActivity" />
-        <activity android:name="org.mmapp.assignments.GoogleSearchResultsActivity" />
-        <activity android:name="org.mmapp.assignments.GoogleSearchActivity"
+
+        <activity android:name=".assignments.AssignmentsOverviewActivity" />
+        <activity android:name=".assignments.StateSwitchingActivity" />
+        <activity android:name=".assignments.RecordVideoActivity" />
+        <activity android:name=".assignments.NumpadDemoActivity" />
+        <activity android:name=".assignments.NumpadActivity" />
+        <activity android:name=".assignments.GoogleSearchResultsActivity" />
+        <activity android:name=".assignments.GoogleSearchActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name="org.mmapp.assignments.LotteryActivity"
+        <activity android:name=".assignments.LotteryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name="org.mmapp.assignments.FahrenheitToCelsiusActivity"
+        <activity android:name=".assignments.FahrenheitToCelsiusActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name="org.mmapp.assignments.RandomSquaresActivity" />
-        <activity android:name="org.mmapp.assignments.MondrianActivity" />
-        <activity android:name="org.mmapp.assignments.TerminalActivity" />
-        <activity android:name="org.mmapp.assignments.WildbienenActivity" />
-        <activity android:name="org.mmapp.assignments.BreakoutActivity" />
-        <activity android:name="org.mmapp.labs.AboutActivity" />
-        <activity android:name="org.mmapp.labs.BarcodeActivity" />
-        <activity android:name="org.mmapp.labs.BorderLayoutActivity" />
-        <activity android:name="org.mmapp.labs.CalculatorActivity" />
-        <activity android:name="org.mmapp.labs.CalendarActivity" />
-        <activity android:name="org.mmapp.labs.DialogActivity" />
-        <activity android:name="org.mmapp.labs.EmailActivity" />
-        <activity android:name="org.mmapp.labs.GeoActivity" />
-        <activity android:name="org.mmapp.labs.LabsOverviewActivity" />
-        <activity android:name="org.mmapp.labs.MenuActivity" />
-        <activity android:name="org.mmapp.labs.RotationActivity"
+        <activity android:name=".assignments.RandomSquaresActivity" />
+        <activity android:name=".assignments.MondrianActivity" />
+        <activity android:name=".assignments.TerminalActivity" />
+        <activity android:name=".assignments.WildbienenActivity" />
+        <activity android:name=".assignments.BreakoutActivity" />
+
+        <activity android:name=".labs.AboutActivity" />
+        <activity android:name=".labs.BarcodeActivity" />
+        <activity android:name=".labs.BorderLayoutActivity" />
+        <activity android:name=".labs.CalculatorActivity" />
+        <activity android:name=".labs.CalendarActivity" />
+        <activity android:name=".labs.DialogActivity" />
+        <activity android:name=".labs.EmailActivity" />
+        <activity android:name=".labs.GeoActivity" />
+        <activity android:name=".labs.LabsOverviewActivity" />
+        <activity android:name=".labs.MenuActivity" />
+        <activity android:name=".labs.RotationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name="org.mmapp.labs.SimpleActivity" />
-        <activity android:name="org.mmapp.labs.SMSActivity" />
-        <activity android:name="org.mmapp.MainActivity">
+        <activity android:name=".labs.SimpleActivity" />
+        <activity android:name=".labs.SMSActivity" />
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

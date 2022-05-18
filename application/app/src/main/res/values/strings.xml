@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Application</string>
+    <string name="app_name">MMApp</string>
     <string name="welcome">Welcome to my app</string>
     <string name="click_me">Click Me!</string>
     <string name="introduction_tictactoe">

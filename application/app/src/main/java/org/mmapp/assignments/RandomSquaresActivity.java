@@ -18,6 +18,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
 import java.util.Random;
 
@@ -31,24 +32,16 @@ import java.util.Random;
  * @author Erik Roemmelt
  */
 public class RandomSquaresActivity extends AppCompatActivity {
+    private ConfigActionBar configActionBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(new GraphicsView(RandomSquaresActivity.this));
-        configureActionBar();
-    }
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String    className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(RandomSquaresActivity.this, AssignmentsOverviewActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 

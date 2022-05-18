@@ -1,6 +1,5 @@
 package org.mmapp.assignments;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,10 +15,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Random;
 import java.util.TreeSet;
 
@@ -33,8 +30,8 @@ import java.util.TreeSet;
  * @author Erik Roemmelt
  */
 public class LotteryActivity extends AppCompatActivity {
-
-    private TextView resultView;
+    private ConfigActionBar configActionBar;
+    private TextView        resultView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,20 +54,11 @@ public class LotteryActivity extends AppCompatActivity {
         ll.addView(resultView);
 
         setContentView(ll);
-        configureActionBar();
-    }
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(LotteryActivity.this, AssignmentsOverviewActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 

@@ -18,6 +18,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
 import java.util.Random;
 import java.util.logging.Logger;
@@ -32,24 +33,16 @@ import java.util.logging.Logger;
  * @author Erik Roemmelt
  */
 public class MondrianActivity extends AppCompatActivity {
+    private ConfigActionBar configActionBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(new MondrianView(MondrianActivity.this));
-        configureActionBar();
-    }
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String    className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(MondrianActivity.this, AssignmentsOverviewActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 

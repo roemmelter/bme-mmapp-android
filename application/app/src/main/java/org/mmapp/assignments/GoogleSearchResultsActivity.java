@@ -27,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
@@ -38,7 +39,7 @@ import org.mmapp.R;
  * @author Erik Roemmelt
  */
 public class GoogleSearchResultsActivity extends AppCompatActivity {
-
+    private ConfigActionBar configActionBar;
     private WebView resultsView;
 
     @Override
@@ -50,23 +51,10 @@ public class GoogleSearchResultsActivity extends AppCompatActivity {
 
         startActivityForResult(new Intent(getApplicationContext(), GoogleSearchActivity.class), 1);
 
-        configureActionBar();
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(GoogleSearchResultsActivity.this,
-                                         AssignmentsOverviewActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 

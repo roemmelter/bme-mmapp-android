@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.MainActivity;
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -37,7 +38,7 @@ import java.io.InputStreamReader;
  * @author Erik Roemmelt
  */
 public class TerminalActivity extends AppCompatActivity {
-
+    private ConfigActionBar configActionBar;
     private final String PLACEHOLDER_COMMAND = "ls -al /system/app";
 
     @Override
@@ -71,21 +72,10 @@ public class TerminalActivity extends AppCompatActivity {
         ll.addView(resultView);
 
         setContentView(ll);
-        configureActionBar();
-    }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String    className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(TerminalActivity.this, MainActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 

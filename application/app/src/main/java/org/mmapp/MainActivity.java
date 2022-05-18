@@ -17,6 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
  * <p><br>
@@ -28,14 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author Erik Roemmelt
  */
 public class MainActivity extends AppCompatActivity {
-
-    private final String PACKAGE_BASE = "org.mmapp.";
-    private final String PACKAGE_LABS = "labs.";
-    private final String PACKAGE_ASSIGNMENTS = "assignments.";
-    private final String[] ACTIVITY_LIST = {
-            PACKAGE_BASE + PACKAGE_ASSIGNMENTS + "AssignmentsOverview",
-            PACKAGE_BASE + PACKAGE_LABS + "LabsOverview",
-    };
+    private Map<String, Integer> activityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +46,38 @@ public class MainActivity extends AppCompatActivity {
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setPadding(10,10,10,10);
 
-        for (String activity : ACTIVITY_LIST) {
-            ll.addView(createButtonForActivity(this, activity));
+        initializeActivityList();
+        for (Map.Entry<String, Integer> entry : activityList.entrySet()) {
+            ll.addView(createButtonForActivity(this, entry.getKey(), entry.getValue()));
         }
-
         setContentView(ll);
     }
 
-    protected Button createButtonForActivity(Context ctx, String activity) {
+    private void initializeActivityList() {
+        final String PACKAGE_BASE = "org.mmapp.";
+        activityList = new TreeMap<String, Integer>();
+        activityList.put(PACKAGE_BASE + "assignments.AssignmentsOverview",
+                         getResources().getColor(R.color.LightSkyBlue));
+        activityList.put(PACKAGE_BASE + "labs.LabsOverview",
+                         getResources().getColor(R.color.Bisque));
+    }
+
+    protected Button createButtonForActivity(Context ctx, String activity, int backgroundColorId) {
         String btnLabel = activity.substring(activity.lastIndexOf(".") + 1);
         Button btn = new Button(ctx);
-        btn.setTypeface(Typeface.create(
-                "sans-serif", Typeface.NORMAL));
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams.weight = 1;
+        btn.setLayoutParams(layoutParams);
+        btn.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         btn.setTransformationMethod(null);
         btn.setText(btnLabel);
+        btn.setTextSize(20.0f);
         btn.setPadding(0,0,0,0);
+        btn.setBackgroundColor(backgroundColorId);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),
-                               "Button '" + btnLabel + "' was clicked",
-                               Toast.LENGTH_SHORT)
-                    .show();
                 try {
                     Class<?> classToStart = Class.forName(activity + "Activity");
                     Intent intent = new Intent(ctx, classToStart);

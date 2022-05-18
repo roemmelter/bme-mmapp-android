@@ -1,7 +1,6 @@
 package org.mmapp.assignments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -12,13 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
 import java.text.DecimalFormat;
 
@@ -32,7 +31,7 @@ import java.text.DecimalFormat;
  * @author Erik Roemmelt
  */
 public class FahrenheitToCelsiusActivity extends AppCompatActivity {
-
+    private ConfigActionBar configActionBar;
     private TextView resultView;
 
     @Override
@@ -59,23 +58,10 @@ public class FahrenheitToCelsiusActivity extends AppCompatActivity {
         ll.addView(resultView);
 
         setContentView(ll);
-
-        configureActionBar();
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(FahrenheitToCelsiusActivity.this, AssignmentsOverviewActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 

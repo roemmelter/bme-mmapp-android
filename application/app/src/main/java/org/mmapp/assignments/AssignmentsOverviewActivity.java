@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.MainActivity;
 import org.mmapp.R;
+import org.mmapp.util.ConfigActionBar;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,6 +41,7 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
     private final String PACKAGE_ASSIGNMENTS = "assignments.";
     private final String PACKAGE_LABS = "labs.";
     private final String ACTIVITY_STRING = "Activity";
+    private ConfigActionBar configActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,22 +68,13 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
         scrollView.addView(ll);
 
         setContentView(scrollView);
-        configureActionBar();
-    }
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        configActionBar = new ConfigActionBar(MainActivity.class, this, true);
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(AssignmentsOverviewActivity.this, MainActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
+
     private ArrayList<String> fillActivityList(ArrayList<String> arrayList) {
         String packageName = PACKAGE_LABS;
         arrayList.add(packageName + "LabsOverview");

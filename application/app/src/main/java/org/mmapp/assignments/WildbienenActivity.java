@@ -31,6 +31,7 @@ import androidx.core.content.res.ResourcesCompat;
 import org.mmapp.R;
 import org.mmapp.util.BinaryNode;
 import org.mmapp.util.BinaryTree;
+import org.mmapp.util.ConfigActionBar;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -46,7 +47,7 @@ import java.util.function.BinaryOperator;
  * @author Erik Roemmelt
  */
 public class WildbienenActivity extends AppCompatActivity {
-
+    private ConfigActionBar configActionBar;
     private BinaryTree<String> beeCheckList;
     private BinaryNode<String> currentNode;
     private TextView displayText;
@@ -76,20 +77,10 @@ public class WildbienenActivity extends AppCompatActivity {
         createDecisionTree();
         displayText.setText(getResources().getString(R.string.wildbienen_intro));
 
-        configureActionBar();
-    }
-
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String    className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        configActionBar = new ConfigActionBar(AssignmentsOverviewActivity.class, this, true);
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            startActivity(new Intent(WildbienenActivity.this, AssignmentsOverviewActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
 
