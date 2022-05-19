@@ -14,7 +14,6 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.MainActivity;
@@ -22,8 +21,6 @@ import org.mmapp.R;
 import org.mmapp.util.ConfigActionBar;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
@@ -37,9 +34,6 @@ import java.util.HashSet;
  */
 public class AssignmentsOverviewActivity extends AppCompatActivity {
 
-    private final String PACKAGE_BASE = "org.mmapp.";
-    private final String PACKAGE_ASSIGNMENTS = "assignments.";
-    private final String PACKAGE_LABS = "labs.";
     private final String ACTIVITY_STRING = "Activity";
     private ConfigActionBar configActionBar;
 
@@ -60,8 +54,7 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setPadding(10,10,10,10);
 
-        ArrayList<String> activityList = new ArrayList<>();
-        activityList = fillActivityList(activityList);
+        ArrayList<String> activityList = initActivityList();
         for (String activity : activityList) {
             ll.addView(createButtonForActivity(this, activity));
         }
@@ -75,10 +68,11 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private ArrayList<String> fillActivityList(ArrayList<String> arrayList) {
-        String packageName = PACKAGE_LABS;
+    private ArrayList<String> initActivityList() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        String packageName = getResources().getString(R.string.package_labs) + ".";
         arrayList.add(packageName + "LabsOverview");
-        packageName = PACKAGE_ASSIGNMENTS;
+        packageName = getResources().getString(R.string.package_assignments) + ".";
         // Assignment 1
         arrayList.add(packageName + "StateSwitching");
         arrayList.add(packageName + "RecordVideo");
@@ -116,8 +110,9 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
                                Toast.LENGTH_SHORT)
                     .show();
                 try {
+                    String packageBase = getResources().getString(R.string.package_base);
                     Class<?> classToStart =
-                            Class.forName(PACKAGE_BASE + activity + ACTIVITY_STRING);
+                            Class.forName(packageBase + activity + ACTIVITY_STRING);
                     Intent intent = new Intent(ctx, classToStart);
                     startActivity(intent);
                 } catch (ClassNotFoundException exception) {

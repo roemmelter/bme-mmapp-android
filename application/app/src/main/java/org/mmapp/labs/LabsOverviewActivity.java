@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.MainActivity;
 import org.mmapp.R;
+import org.mmapp.assignments.AssignmentsOverviewActivity;
+import org.mmapp.util.ConfigActionBar;
 
 import java.util.ArrayList;
 
@@ -33,14 +36,17 @@ import java.util.ArrayList;
  */
 public class LabsOverviewActivity extends AppCompatActivity {
 
-    private final String PACKAGE_BASE = "org.mmapp.";
-    private final String PACKAGE_ASSIGNMENTS = "assignments.";
-    private final String PACKAGE_LABS = "labs.";
     private final String ACTIVITY_STRING = "Activity";
+    private ConfigActionBar configActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ScrollView scrollView = new ScrollView(LabsOverviewActivity.this);
+        scrollView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
 
         LinearLayout ll = new LinearLayout(this);
         ll.setLayoutParams(new ViewGroup.LayoutParams(
@@ -50,33 +56,24 @@ public class LabsOverviewActivity extends AppCompatActivity {
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setPadding(10,10,10,10);
 
-        ArrayList<String> activityList = new ArrayList<>();
-        activityList = fillActivityList(activityList);
+        ArrayList<String> activityList = initActivityList();
         for (String activity : activityList) {
             ll.addView(createButtonForActivity(this, activity));
         }
+        scrollView.addView(ll);
 
-        setContentView(ll);
-        configureActionBar();
-    }
-    private void configureActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        String className = getClass().getSimpleName();
-        actionBar.setTitle(className.substring(0, className.lastIndexOf("Activity")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        setContentView(scrollView);
+        configActionBar = new ConfigActionBar(MainActivity.class, this, true);
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                startActivity(new Intent(this, MainActivity.class));
-        }
+        configActionBar.setActionBackButton(item);
         return super.onOptionsItemSelected(item);
     }
-    private ArrayList<String> fillActivityList(ArrayList<String> arrayList) {
-        String packageName = PACKAGE_ASSIGNMENTS;
+    private ArrayList<String> initActivityList() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        String packageName = getResources().getString(R.string.package_assignments) + ".";
         arrayList.add(packageName + "AssignmentsOverview");
-        packageName = PACKAGE_LABS;
+        packageName = getResources().getString(R.string.package_labs) + ".";
         arrayList.add(packageName + "About");
         arrayList.add(packageName + "BorderLayout");
         arrayList.add(packageName + "Button");
@@ -86,6 +83,7 @@ public class LabsOverviewActivity extends AppCompatActivity {
         arrayList.add(packageName + "Geo");
         arrayList.add(packageName + "Menu");
         arrayList.add(packageName + "Rotation");
+        arrayList.add(packageName + "ScreenDimensions");
         arrayList.add(packageName + "Simple");
         arrayList.add(packageName + "SMS");
         return arrayList;
@@ -102,13 +100,10 @@ public class LabsOverviewActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),
-                               "Button '" + btnLabel + "' was clicked",
-                               Toast.LENGTH_SHORT)
-                        .show();
                 try {
+                    String packageBase = getResources().getString(R.string.package_base);
                     Class<?> classToStart =
-                            Class.forName(PACKAGE_BASE + activity + ACTIVITY_STRING);
+                            Class.forName(packageBase + activity + ACTIVITY_STRING);
                     Intent intent = new Intent(ctx, classToStart);
                     startActivity(intent);
                 } catch (ClassNotFoundException exception) {
