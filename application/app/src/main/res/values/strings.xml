@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MMApp</string>
+    <string name="package_base">org.mmapp</string>
+    <string name="package_labs">.labs</string>
+    <string name="package_assignments">.assignments</string>
     <string name="welcome">Welcome to my app</string>
     <string name="click_me">Click Me!</string>
     <string name="introduction_tictactoe">

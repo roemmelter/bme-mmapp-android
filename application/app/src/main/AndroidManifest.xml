@@ -31,8 +31,10 @@
         <activity android:name=".assignments.BreakoutActivity" />
 
         <activity android:name=".labs.AboutActivity" />
+        <activity android:name=".labs.AlarmClockActivity" />
         <activity android:name=".labs.BarcodeActivity" />
         <activity android:name=".labs.BorderLayoutActivity" />
+        <activity android:name=".labs.ButtonActivity" />
         <activity android:name=".labs.CalculatorActivity" />
         <activity android:name=".labs.CalendarActivity" />
         <activity android:name=".labs.DialogActivity" />
@@ -40,10 +42,13 @@
         <activity android:name=".labs.GeoActivity" />
         <activity android:name=".labs.LabsOverviewActivity" />
         <activity android:name=".labs.MenuActivity" />
+        <activity android:name=".labs.QuotesActivity" />
         <activity android:name=".labs.RotationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".labs.ScreenDimensionsActivity" />
         <activity android:name=".labs.SimpleActivity" />
         <activity android:name=".labs.SMSActivity" />
+        <activity android:name=".labs.TabsActivity" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
