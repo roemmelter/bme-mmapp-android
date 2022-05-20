@@ -1,14 +1,10 @@
 package org.mmapp.util;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.mmapp.assignments.AssignmentsOverviewActivity;
 
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
@@ -43,6 +39,12 @@ public class ConfigActionBar {
             _currentActivity.startActivity(new Intent(_currentActivity,
                                                       _overviewActivity));
         }
+    }
+    public void setTitle(String title) {
+        _actionBar.setTitle(title);
+    }
+    public String getTitle() {
+        return (String) _actionBar.getTitle();
     }
 
     private void setOverviewActivity(Class<?> overViewActivity) {

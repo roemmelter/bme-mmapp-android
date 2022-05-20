@@ -3,23 +3,25 @@ package org.mmapp.labs;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.mmapp.MainActivity;
 import org.mmapp.R;
-import org.mmapp.assignments.AssignmentsOverviewActivity;
 import org.mmapp.util.ConfigActionBar;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 public class LabsOverviewActivity extends AppCompatActivity {
 
     private final String ACTIVITY_STRING = "Activity";
+    private final String SEPARATOR_STRING = "separator";
     private ConfigActionBar configActionBar;
 
     @Override
@@ -57,8 +60,14 @@ public class LabsOverviewActivity extends AppCompatActivity {
         ll.setPadding(10,10,10,10);
 
         ArrayList<String> activityList = initActivityList();
+        int counter = 1;
         for (String activity : activityList) {
-            ll.addView(createButtonForActivity(this, activity));
+            if (activity.equals(SEPARATOR_STRING)) {
+                createSeparator(ll,this, counter);
+                counter++;
+            } else {
+                ll.addView(createButtonForActivity(this, activity));
+            }
         }
         scrollView.addView(ll);
 
@@ -74,18 +83,32 @@ public class LabsOverviewActivity extends AppCompatActivity {
         String packageName = getResources().getString(R.string.package_assignments) + ".";
         arrayList.add(packageName + "AssignmentsOverview");
         packageName = getResources().getString(R.string.package_labs) + ".";
-        arrayList.add(packageName + "About");
-        arrayList.add(packageName + "BorderLayout");
+        // Lab 1
+        arrayList.add(SEPARATOR_STRING);
+        arrayList.add(packageName + "Barcode");
         arrayList.add(packageName + "Button");
-        arrayList.add(packageName + "Calculator");
         arrayList.add(packageName + "Calendar");
-        arrayList.add(packageName + "Dialog");
+        arrayList.add(packageName + "Email");
         arrayList.add(packageName + "Geo");
-        arrayList.add(packageName + "Menu");
         arrayList.add(packageName + "Rotation");
-        arrayList.add(packageName + "ScreenDimensions");
         arrayList.add(packageName + "Simple");
         arrayList.add(packageName + "SMS");
+        // Lab 2
+        arrayList.add(SEPARATOR_STRING);
+        arrayList.add(packageName + "About");
+        arrayList.add(packageName + "BorderLayout");
+        arrayList.add(packageName + "Calculator");
+        arrayList.add(packageName + "Dialog");
+        arrayList.add(packageName + "Menu");
+        arrayList.add(packageName + "ScreenDimensions");
+        // Lab 3
+        arrayList.add(SEPARATOR_STRING);
+        // Lab 4
+        arrayList.add(SEPARATOR_STRING);
+        // Lab 5
+        arrayList.add(SEPARATOR_STRING);
+        // Lab 6
+        arrayList.add(SEPARATOR_STRING);
         return arrayList;
     }
 
@@ -116,5 +139,27 @@ public class LabsOverviewActivity extends AppCompatActivity {
             }
         });
         return btn;
+    }
+    private void createSeparator(LinearLayout ll, Context context, int counter) {
+        final String TEXT_LABEL = "Lab ";
+        TextView     tv         = new TextView(context);
+        tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                                      ViewGroup.LayoutParams.WRAP_CONTENT));
+        tv.setGravity(Gravity.START);
+        tv.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        tv.setTextSize(16.0f);
+        tv.setText(TEXT_LABEL + counter);
+        ll.addView(tv);
+
+        View divider = new View(context);
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.0f,
+                                                     getResources().getDisplayMetrics());
+        ViewGroup.LayoutParams params =
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        divider.setLayoutParams(params);
+        int[]    dividerAttrs    = { android.R.attr.listDivider };
+        Drawable dividerDrawable = getTheme().obtainStyledAttributes(dividerAttrs).getDrawable(0);
+        divider.setBackground(dividerDrawable);
+        ll.addView(divider);
     }
 }

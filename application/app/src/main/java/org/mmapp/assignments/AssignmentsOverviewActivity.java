@@ -3,14 +3,18 @@ package org.mmapp.assignments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +39,7 @@ import java.util.ArrayList;
 public class AssignmentsOverviewActivity extends AppCompatActivity {
 
     private final String ACTIVITY_STRING = "Activity";
+    private final String SEPARATOR_STRING = "separator";
     private ConfigActionBar configActionBar;
 
     @Override
@@ -55,8 +60,14 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
         ll.setPadding(10,10,10,10);
 
         ArrayList<String> activityList = initActivityList();
+        int counter = 1;
         for (String activity : activityList) {
-            ll.addView(createButtonForActivity(this, activity));
+            if (activity.equals(SEPARATOR_STRING)) {
+                createSeparator(ll,this, counter);
+                counter++;
+            } else {
+                ll.addView(createButtonForActivity(this, activity));
+            }
         }
         scrollView.addView(ll);
 
@@ -74,23 +85,30 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
         arrayList.add(packageName + "LabsOverview");
         packageName = getResources().getString(R.string.package_assignments) + ".";
         // Assignment 1
+        arrayList.add(SEPARATOR_STRING);
         arrayList.add(packageName + "StateSwitching");
         arrayList.add(packageName + "RecordVideo");
         arrayList.add(packageName + "NumpadDemo");
         // Assignment 2
+        arrayList.add(SEPARATOR_STRING);
         arrayList.add(packageName + "GoogleSearchResults");
         arrayList.add(packageName + "Lottery");
         arrayList.add(packageName + "FahrenheitToCelsius");
         // Assignment 3
+        arrayList.add(SEPARATOR_STRING);
         arrayList.add(packageName + "RandomSquares");
         arrayList.add(packageName + "Mondrian");
         arrayList.add(packageName + "Terminal");
         arrayList.add(packageName + "Wildbienen");
-        arrayList.add(packageName + "Breakout");
         // Assignment 4
+        arrayList.add(SEPARATOR_STRING);
+        arrayList.add(packageName + "Breakout");
         arrayList.add(packageName + "Snowflakes");
+        arrayList.add(packageName + "Editor");
         // Assignment 5
+        arrayList.add(SEPARATOR_STRING);
         // Assignment 6
+        arrayList.add(SEPARATOR_STRING);
         return arrayList;
     }
 
@@ -125,5 +143,27 @@ public class AssignmentsOverviewActivity extends AppCompatActivity {
             }
         });
         return btn;
+    }
+    private void createSeparator(LinearLayout ll, Context context, int counter) {
+        final String TEXT_LABEL = "Assignment ";
+        TextView tv = new TextView(context);
+        tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                                      ViewGroup.LayoutParams.WRAP_CONTENT));
+        tv.setGravity(Gravity.START);
+        tv.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        tv.setTextSize(16.0f);
+        tv.setText(TEXT_LABEL + counter);
+        ll.addView(tv);
+
+        View divider = new View(context);
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.0f,
+                                          getResources().getDisplayMetrics());
+        ViewGroup.LayoutParams params =
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        divider.setLayoutParams(params);
+        int[] dividerAttrs = { android.R.attr.listDivider };
+        Drawable dividerDrawable = getTheme().obtainStyledAttributes(dividerAttrs).getDrawable(0);
+        divider.setBackground(dividerDrawable);
+        ll.addView(divider);
     }
 }
