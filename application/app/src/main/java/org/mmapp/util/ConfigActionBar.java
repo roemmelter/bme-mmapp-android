@@ -35,9 +35,12 @@ public class ConfigActionBar {
     }
     public void setActionBackButton(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            _currentActivity.finish();
-            _currentActivity.startActivity(new Intent(_currentActivity,
-                                                      _overviewActivity));
+            try {
+                _currentActivity.finish();
+                _currentActivity.startActivity(new Intent(_currentActivity, _overviewActivity));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
     public void setTitle(String title) {

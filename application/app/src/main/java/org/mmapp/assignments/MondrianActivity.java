@@ -1,27 +1,21 @@
 package org.mmapp.assignments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.mmapp.R;
 import org.mmapp.util.ConfigActionBar;
 
 import java.util.Random;
-import java.util.logging.Logger;
 
 /**
  * MIT License (http://choosealicense.com/licenses/mit/)
@@ -47,8 +41,8 @@ public class MondrianActivity extends AppCompatActivity {
     }
 
     class MondrianView extends View {
-        private final int BASE_SIZE = 40;
-        private final int STROKE_SIZE = 1;
+        private final int BASE_SIZE = 80;
+        private final int STROKE_SIZE = 0;
 
         private Random rgen = new Random();
         private Paint  paintStroke;
@@ -124,18 +118,11 @@ public class MondrianActivity extends AppCompatActivity {
 
         private void drawRectangle(int left, int top, int width, int height) {
             int color = getRandomColor();
-            //String colorText = color == Color.WHITE ? "White" :
-//                               color == Color.BLUE ? "Blue" :
-//                               color == Color.RED ? "Red" :
-//                               color == Color.YELLOW ? "Yellow" :
-//                               "ERROR";
-//            Log.d("MMAPP_Mondrian",
-             //     "left: "+left+", top: "+top+" # width: "+width+", height: "+height+" # color:
-            //     "+colorText);
 
             paintFill.setColor(color);
-            bitmapCanvas.drawRect(left + STROKE_SIZE, top + STROKE_SIZE, width - STROKE_SIZE *2,
-                                  height - STROKE_SIZE *2,
+            bitmapCanvas.drawRect(left + STROKE_SIZE, top + STROKE_SIZE,
+                                  left + width - STROKE_SIZE *2,
+                                  top + height - STROKE_SIZE *2,
                                   paintFill);
             bitmapCanvas.drawRect(left, top, width, height, paintStroke);
         }

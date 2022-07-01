@@ -5,19 +5,14 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -44,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT));
         ll.setBackgroundColor(getResources().getInteger(R.integer.white_bg));
         ll.setOrientation(LinearLayout.VERTICAL);
-        ll.setPadding(10,10,10,10);
+        ll.setPadding(0,15,0,0);
 
         initializeActivityList();
         for (Map.Entry<String, Integer> entry : activityList.entrySet()) {
             ll.addView(createButtonForActivity(this, entry.getKey(), entry.getValue()));
         }
+        ll.setDividerPadding(10);
+        ll.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
         setContentView(ll);
     }
 
@@ -68,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.weight = 1;
+        layoutParams.setMargins(20,0,20,15);
         btn.setLayoutParams(layoutParams);
         btn.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         btn.setTransformationMethod(null);

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.mmapp">
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -28,6 +29,8 @@
         <activity android:name=".assignments.MondrianActivity" />
         <activity android:name=".assignments.TerminalActivity" />
         <activity android:name=".assignments.WildbienenActivity" />
+        <activity android:name=".assignments.EditorActivity" />
+        <activity android:name=".assignments.SnowflakesActivity" />
         <activity android:name=".assignments.BreakoutActivity" />
 
         <activity android:name=".labs.AboutActivity" />
